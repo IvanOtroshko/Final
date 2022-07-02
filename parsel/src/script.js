@@ -4,7 +4,7 @@ const prev = document.getElementById('btn-prev'),
     slides = document.getElementsByClassName('slide'), // 2) заменить на живую коллекцию
     dots = document.querySelectorAll('.dot'),
     sliderWrapper = document.querySelector('.slider-wrapper');
-
+    
 let index = 0;
 
 const activeSlide = n => {
