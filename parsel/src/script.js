@@ -1,7 +1,7 @@
 
 const prev = document.getElementById('btn-prev'),
     next = document.getElementById('btn-next'),
-    slides = document.getElementsByClassName('slide'), // 2) заменить на живую коллекцию
+    slides = document.getElementsByClassName('slide'),
     dots = document.querySelectorAll('.dot'),
     sliderWrapper = document.querySelector('.slider-wrapper'),
 
@@ -15,29 +15,90 @@ let index = 0;
 
 // Filter 
 
-const inputText = document.querySelector('.search-area');
+const enterProduct = [];
 
+const inputText = document.querySelector('.search-area');
 inputText.addEventListener('keydown', (event) => {
-    if (event.keyCode === 13) {
-        arrayProducts.forEach(({ productName }) => {
-            if (productName === inputText.value) {
-                // productName.style.border = '1px solid red';
-                const headerInfo = document.querySelector('header');
-                const showProduct = document.createElement('div');
-                showProduct.className = 'modal-product';
-                showProduct.style.cssText = `
-                position: fixed;
-                width: 100%;
-                height: 100%;
-                background-color:rgba(0,0,0,.5);
-                z-index: 1000;
-                bottom: -150px;
+    event.stopImmediatePropagation();
+    if(event.keyCode === 13) {
+        arrayProducts.find( x => x.productName === inputText.value)
+        const enterProduct = [].concat(arrayProducts.find( x => x.productName === inputText.value));
+        if(enterProduct[0] !== undefined) {
+
+            enterProduct.forEach(product => {
+            enter(product)});
+    
+            function enter({productName,sales, price, oldPrice, image}) {
+            const headerInfo = document.querySelector('header');
+            const showProduct = document.createElement('div');
+            showProduct.className = 'modal-product';
+            showProduct.style.cssText = `
+            padding-top: 50px;
+            text-align: center;
+            font-size: 50px;
+            color: rgba(215,22,154,0.9654455532212886);
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            bottom: -150px;
             `;
-                headerInfo.append(showProduct);
-            } else { }
-        })
-    }
-});
+            headerInfo.append(showProduct);
+
+            const searchModal = document.createElement('div');
+            searchModal.classList.add('search-modal');
+            searchModal.style.cssText = `
+                background-color: white;
+                border-radius: 35px;
+                width: 400px;
+                height: 600px;
+                margin: 0 auto;
+
+            `;
+
+            searchModal.innerHTML = `
+            <div class="search_item-image-card">
+            <img class="search_item-image" src=${image}/>
+                <div class="search_info">
+                        <div class="search-info-discount">скидка -${sales}</div>
+                        <button class="search-add-cart">+</button>
+                        <div class="search_item-info-newprice">${price}</div>
+                        <div class="search_item-info-oldprice">${oldPrice}</div>
+                        <div class="search_item-info-productname">${productName}</div>
+                </div>
+            </div>
+        `;
+            showProduct.append(searchModal);
+
+            
+            }
+
+
+        } else {
+            const headerInfo = document.querySelector('header');
+            const showProduct = document.createElement('div');
+            showProduct.className = 'modal-product';
+            showProduct.innerText = 'Нет такого продукта, попробуй еще раз';
+            showProduct.style.cssText = `
+            text-align: center;
+            font-size: 80px;
+            color: rgba(215,22,154,0.9654455532212886);
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            bottom: -150px;
+            `;
+
+            headerInfo.append(showProduct);
+           
+        }
+
+
+    
+}});  
 
 // and Filter
 
@@ -120,13 +181,12 @@ async function getPhoto() {
 getPhoto();
 
 
-
-const arrayProducts = [
-    { id: 1, productName: 'Штаны', sales: '10%', price: '900p', oldPrice: '1000p', image: 'http://loremflickr.com/640/480/food' },
-    { id: 2, productName: 'Шорты', sales: '5%', price: '950p', oldPrice: '1000p', image: 'http://loremflickr.com/640/480/food' },
-    { id: 3, productName: 'Майка', sales: '15%', price: '850p', oldPrice: '1000p', image: 'http://loremflickr.com/640/480/food' },
-    { id: 4, productName: 'Обувь', sales: '20%', price: '800p', oldPrice: '1000p', image: 'http://loremflickr.com/640/480/food' },
-    { id: 5, productName: 'Шапка', sales: '15%', price: '850p', oldPrice: '1000p', image: 'http://loremflickr.com/640/480/food' },
+const arrayProducts = [ 
+    {id: 1, productName: 'штаны', sales: '10%', price: '900p', oldPrice:'1000p', image:'http://loremflickr.com/640/480/food'},
+    {id: 2, productName: 'шорты', sales: '5%', price: '950p', oldPrice:'1000p', image:'http://loremflickr.com/640/480/food'},
+    {id: 3, productName: 'майка', sales: '15%', price: '850p', oldPrice:'1000p', image:'http://loremflickr.com/640/480/food'},
+    {id: 4, productName: 'обувь', sales: '20%', price: '800p', oldPrice:'1000p', image:'http://loremflickr.com/640/480/food'},
+    {id: 5, productName: 'шапка', sales: '15%', price: '850p', oldPrice:'1000p', image:'http://loremflickr.com/640/480/food'},
 ];
 
 arrayProducts.forEach((product) => {
@@ -140,7 +200,7 @@ function createItem({ productName, sales, price, oldPrice, image }) {
     const productItem = document.createElement('div');
     productItem.classList.add('products_item');
 
-    productItem.innerHTML = `
+   productItem.innerHTML = `
     <div class="products_item-image-card">
     <img class="products_item-image" src=${image} />
         <div class="products_item-card">
@@ -155,7 +215,7 @@ function createItem({ productName, sales, price, oldPrice, image }) {
         <div class="products_item-info-newprice">${price}</div>
         <div class="products_item-info-oldprice">${oldPrice}</div>
         <div class="products_item-info-productname">${productName}</div>
-    </div>
+    </div >
 `;
     productsList.append(productItem);
 
