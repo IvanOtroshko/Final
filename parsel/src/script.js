@@ -4,7 +4,7 @@ const prev = document.getElementById('btn-prev'),
     slides = document.getElementsByClassName('slide'), // 2) заменить на живую коллекцию
     dots = document.querySelectorAll('.dot'),
     sliderWrapper = document.querySelector('.slider-wrapper'),
-    
+
     btnCart = document.querySelector('.btn-cart'),
     productsList = document.querySelector('.products_list');
 
@@ -62,7 +62,7 @@ inputText.addEventListener('keydown', (event) => {
             <img class="search_item-image" src=${image}/>
                 <div class="search_info">
                         <div class="search-info-discount">скидка -${sales}</div>
-                        <button class="search-add-cart">+</button>
+                        <button class="search-add-cart">Добавить в корзину</button>
                         <div class="search_item-info-newprice">${price}</div>
                         <div class="search_item-info-oldprice">${oldPrice}</div>
                         <div class="search_item-info-productname">${productName}</div>
@@ -71,6 +71,20 @@ inputText.addEventListener('keydown', (event) => {
         `;
             showProduct.append(searchModal);
 
+            showProduct.addEventListener('click', (e) => {
+                if (
+                  e.target === showProduct ||
+                  e.target.getAttribute('data-close') == ''
+                ) {
+                  closeModal();
+                }
+              });
+            
+              function closeModal() {
+                showProduct.classList.add('hide');
+                showProduct.classList.remove('show');
+                document.showProduct.style.overflow = '';
+              }
             
             }
 
@@ -96,8 +110,8 @@ inputText.addEventListener('keydown', (event) => {
            
         }
 
+     
 
-    
 }});  
 
 // and Filter
@@ -176,6 +190,8 @@ async function getPhoto() {
 
         sliderWrapper.append(img);
     });
+
+
 }
 
 getPhoto();
