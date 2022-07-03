@@ -1,3 +1,4 @@
+import {setName, getName, generateId} from './localStorage&Id.js';
 
 const prev = document.getElementById('btn-prev'),
     next = document.getElementById('btn-next'),
@@ -10,7 +11,7 @@ const prev = document.getElementById('btn-prev'),
 
 let index = 0;
 
-
+ 
 
 
 // Filter 
@@ -24,6 +25,11 @@ inputText.addEventListener('keydown', (event) => {
         arrayProducts.find( x => x.productName === inputText.value)
         const enterProduct = [].concat(arrayProducts.find( x => x.productName === inputText.value));
         if(enterProduct[0] !== undefined) {
+
+
+            console.log(enterProduct[0].price);
+            
+
 
             enterProduct.forEach(product => {
             enter(product)});
@@ -70,10 +76,21 @@ inputText.addEventListener('keydown', (event) => {
             </div>
         `;
             showProduct.append(searchModal);
-
-            
+                
+            const addSearchBtn = document.querySelector('.search-add-cart');
+            addSearchBtn.addEventListener('click', () => {
+                const basket = {};
+                basket.id = generateId();
+                basket.text = productName;
+                basket.price = price;
+                baskets.push(basket);
+                sumPrice += + price;
+                listSumm.innerHTML =`Итого ${sumPrice}р`;
+                createElement(basket);
+                setName(baskets);
+            });
             }
-
+            
 
         } else {
             const headerInfo = document.querySelector('header');
@@ -181,12 +198,12 @@ async function getPhoto() {
 getPhoto();
 
 
-const arrayProducts = [ 
-    {id: 1, productName: 'штаны', sales: '10%', price: '900p', oldPrice:'1000p', image:'http://loremflickr.com/640/480/food'},
-    {id: 2, productName: 'шорты', sales: '5%', price: '950p', oldPrice:'1000p', image:'http://loremflickr.com/640/480/food'},
-    {id: 3, productName: 'майка', sales: '15%', price: '850p', oldPrice:'1000p', image:'http://loremflickr.com/640/480/food'},
-    {id: 4, productName: 'обувь', sales: '20%', price: '800p', oldPrice:'1000p', image:'http://loremflickr.com/640/480/food'},
-    {id: 5, productName: 'шапка', sales: '15%', price: '850p', oldPrice:'1000p', image:'http://loremflickr.com/640/480/food'},
+export const arrayProducts = [ 
+    {id: 1, productName: 'штаны', sales: '10%', price: '900', oldPrice:'1000p', image:'http://loremflickr.com/640/480/food'},
+    {id: 2, productName: 'шорты', sales: '5%', price: '950', oldPrice:'1000p', image:'http://loremflickr.com/640/480/food'},
+    {id: 3, productName: 'майка', sales: '15%', price: '850', oldPrice:'1000p', image:'http://loremflickr.com/640/480/food'},
+    {id: 4, productName: 'обувь', sales: '20%', price: '800', oldPrice:'1000p', image:'http://loremflickr.com/640/480/food'},
+    {id: 5, productName: 'шапка', sales: '15%', price: '850', oldPrice:'1000p', image:'http://loremflickr.com/640/480/food'},
 ];
 
 arrayProducts.forEach((product) => {
@@ -266,6 +283,95 @@ modal();
   //and ModalCart
 
 
+//   корзина
+
+    const btnDelete = document.querySelector('.modal-info-btnDelete');
+    const addBtn = document.querySelectorAll('.btn-add-cart'); 
+    const modalContent = document.querySelector('.modal__content');
+    const listItemBasket = document.createElement('modal__list');
+    const listSumm = document.createElement('listSumm');
+    let baskets = [];
+
+if (localStorage.getItem('basket')) {
+    baskets = JSON.parse(getName());
+    baskets.forEach((item) => {
+      createElement(item);
+    });
+  }
+
+  let sumPrice = 0;
+  baskets.map((baskets) => {
+  sumPrice +=  +baskets.price;
+  });
+  listSumm.innerHTML =`Итого ${sumPrice}р`;
+  listSumm.classList.add('listSumm');
 
 
+addBtn.forEach((value, index) => {
+    value.addEventListener('click', () => {
+                  const basket = {};
+                  basket.id = generateId();
+                  basket.text = arrayProducts[index].productName;
+                  basket.price = arrayProducts[index].price;
+                  baskets.push(basket);
+                  sumPrice += + arrayProducts[index].price;
+                  listSumm.innerHTML =`Итого ${sumPrice}р`;
+                  createElement(basket);
+                  setName(baskets);
+                  index++;
+});
 
+
+btnDelete.addEventListener('click', () => {
+    baskets.length = 0;
+    listItemBasket.innerHTML = '';
+    sumPrice = 0;
+    listSumm.innerHTML = '';
+    setName(baskets);
+});});
+
+  
+function createElement(basket) {
+    const itemBasket = document.createElement('div');
+    itemBasket.classList.add('itemBasket');
+    itemBasket.id = basket.id;
+  
+    const textBasket = document.createElement('text');
+    textBasket.innerHTML = basket.text;
+    textBasket.style.cssText = `
+    width: 60%;
+    height: 50%;
+    background: white;
+    border-radius: 5px;
+`;
+
+    const checkBasket = document.createElement('price');
+    checkBasket.innerHTML = `${basket.price}р` ;
+    checkBasket.style.cssText = `
+    width: 20%;
+    height: 50%;
+`;
+    const deleteItemBtn = document.createElement('buttonDeleteElement');
+    deleteItemBtn.classList.add('btnDeleteElem');
+    deleteItemBtn.innerText = `X`;
+    
+        modalContent.append(listItemBasket, listSumm);
+        listItemBasket.append(itemBasket)
+        itemBasket.append(textBasket, checkBasket, deleteItemBtn);
+        
+  
+    deleteItemBtn.addEventListener('click', () => {
+      baskets = baskets.filter((i) => i.id !== basket.id);
+      sumPrice -= + basket.price;
+      if (sumPrice === 0) {
+        listSumm.innerHTML = '';
+      } else {
+    listSumm.innerHTML =`Итого ${sumPrice}р`;
+      }
+      setName(baskets);
+      itemBasket.remove();
+    });
+  }
+
+  
+    

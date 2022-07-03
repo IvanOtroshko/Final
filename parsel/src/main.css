@@ -328,17 +328,20 @@ span:last-child {
     padding: 15px;
   }
   
-  .modal__close {
-    position:absolute;
+  .modal__close, .btnDeleteElem {
     top:8px;
     right:14px;
-    font-size:30px;
     color:#000;
     opacity:.5;
     font-weight:700;
     border:none;
     background-color:transparent;
     cursor:pointer;
+  }
+
+  .modal__close {
+    position:absolute;
+    font-size:30px;
   }
 
   .modal_dialog-info {
@@ -377,4 +380,31 @@ span:last-child {
   
   .hide {
     display:none;
+  }
+
+   /* корзина */
+
+  .btnDeleteElem {
+    margin-right: 10px;
+    font-size: 110%;
+  }
+
+  .itemBasket {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #000;
+    border-radius: 20px;
+    margin: 10px 0;
+    height: auto;
+    align-items: center;
+    text-align: center;
+    background: #80808094;
+  }
+
+  .listSumm {
+    width: 85%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
   }
