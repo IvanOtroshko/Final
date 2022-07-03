@@ -13,9 +13,24 @@
                 <div class="wrapper">
                     <div class="header-info">
                         <button type="button" href="index.html" class="btn-logo">Wildberries</button>
-                        <input type="text" class="search-area" placeholder="Поиск...">
-                        <button type="button" class="btn-cart">Корзина</button>
+                        <input type="text" value="" class="search-area" placeholder="Поиск...">
+                        <button type="button" class="btn-cart"><img src="png"></button>
                     </div>
+                </div>
+                <div class="modal">
+                    <div class="modal_dialog">
+                    <div class="modal__content">
+                        <div class="modal__close" data-close>&times;</div>
+                        <div class="modal_dialog-info">
+                            <div class="modal_dialog-info-title">
+                                <div class="modal-info-cart">Корзина</div>
+                                <button class="modal-info-btnDelete">Очистить корзину</button>
+                            </div>
+                            <ul class="items"></ul>
+                        </div>
+                        
+                    </div>
+                </div>
                 </div>
         </section>
     </header>
@@ -40,78 +55,9 @@
 
     <section class="products">
         <div class="wrapper">
-            <div class="products_list">
-                <div class="products_item">
-                    <div class="products_item-card">
-                        <button class="btn-card-preview">Быстрый просмотр</button>
-                        <div class="products_item-card-info">
-                            <div class="card-info-discount">-10%</div>
-                            <button class="btn-add-cart"></button>
-                        </div>
-                    </div>
-                    <div class="products_item-info">
-                        <div class="products_item-info-newprice">900р</div>
-                        <div class="products_item-info-oldprice">1000р</div>
-                        <div class="products_item-info-productname">Штаны</div>
-                    </div>
-                </div>
-                <div class="products_item">
-                    <div class="products_item-card">
-                        <button class="btn-card-preview">Быстрый просмотр</button>
-                        <div class="products_item-card-info">
-                            <div class="card-info-discount">-10%</div>
-                            <button class="btn-add-cart"></button>
-                        </div>
-                    </div>
-                    <div class="products_item-info">
-                        <div class="products_item-info-newprice">900р</div>
-                        <div class="products_item-info-oldprice">1000р</div>
-                        <div class="products_item-info-productname">Штаны</div>
-                    </div>
-                </div>
-                <div class="products_item">
-                    <div class="products_item-card">
-                        <button class="btn-card-preview">Быстрый просмотр</button>
-                        <div class="products_item-card-info">
-                            <div class="card-info-discount">-10%</div>
-                            <button class="btn-add-cart"></button>
-                        </div>
-                    </div>
-                    <div class="products_item-info">
-                        <div class="products_item-info-newprice">900р</div>
-                        <div class="products_item-info-oldprice">1000р</div>
-                        <div class="products_item-info-productname">Штаны</div>
-                    </div>
-                </div>
-                <div class="products_item">
-                    <div class="products_item-card">
-                        <button class="btn-card-preview">Быстрый просмотр</button>
-                        <div class="products_item-card-info">
-                            <div class="card-info-discount">-10%</div>
-                            <button class="btn-add-cart"></button>
-                        </div>
-                    </div>
-                    <div class="products_item-info">
-                        <div class="products_item-info-newprice">900р</div>
-                        <div class="products_item-info-oldprice">1000р</div>
-                        <div class="products_item-info-productname">Штаны</div>
-                    </div>
-                </div>
-                <div class="products_item">
-                    <div class="products_item-card">
-                        <button class="btn-card-preview">Быстрый просмотр</button>
-                        <div class="products_item-card-info">
-                            <div class="card-info-discount">-10%</div>
-                            <button class="btn-add-cart"></button>
-                        </div>
-                    </div>
-                    <div class="products_item-info">
-                        <div class="products_item-info-newprice">900р</div>
-                        <div class="products_item-info-oldprice">1000р</div>
-                        <div class="products_item-info-productname">Штаны</div>
-                    </div>
-                </div>
-            </div>
+             <div class="products_list" id="productsList">
+               
+            </div> 
         </div>
     </section>
 
