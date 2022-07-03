@@ -108,6 +108,24 @@ inputText.addEventListener('keydown', (event) => {
 
             headerInfo.append(showProduct);
            
+
+            showProduct.addEventListener('click', (e) => {
+                if (
+                  e.target === showProduct ||
+                  e.target.getAttribute('data-close') == ''
+                ) {
+                  closeModal();
+                }
+              });
+            
+              function closeModal() {
+                showProduct.classList.add('hide');
+                showProduct.classList.remove('show');
+                document.showProduct.style.overflow = '';
+              }
+            
+
+
         }
 
      
