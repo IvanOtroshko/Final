@@ -76,6 +76,21 @@ inputText.addEventListener('keydown', (event) => {
             </div>
         `;
             showProduct.append(searchModal);
+
+            showProduct.addEventListener('click', (e) => {
+                if (
+                  e.target === showProduct ||
+                  e.target.getAttribute('data-close') == ''
+                ) {
+                  closeModal();
+                }
+              });
+
+              function closeModal() {
+                showProduct.classList.add('hide');
+                showProduct.classList.remove('show');
+                document.showProduct.style.overflow = '';
+              }
                 
             const addSearchBtn = document.querySelector('.search-add-cart');
             addSearchBtn.addEventListener('click', () => {
@@ -111,6 +126,20 @@ inputText.addEventListener('keydown', (event) => {
 
             headerInfo.append(showProduct);
            
+            showProduct.addEventListener('click', (e) => {
+                if (
+                  e.target === showProduct ||
+                  e.target.getAttribute('data-close') == ''
+                ) {
+                  closeModal();
+                }
+              });
+
+              function closeModal() {
+                showProduct.classList.add('hide');
+                showProduct.classList.remove('show');
+                document.showProduct.style.overflow = '';
+              }
         }
 
 
