@@ -71,7 +71,7 @@ inputText.addEventListener('keydown', (event) => {
             <img class="search_item-image" src=${image}/>
                 <div class="search_info">
                         <div class="search-info-discount">скидка -${sales}</div>
-                        <button class="search-add-cart">+</button>
+                        <button class="search-add-cart">Добавить в корзину</button>
                         <div class="search_item-info-newprice">${price}</div>
                         <div class="search_item-info-oldprice">${oldPrice}</div>
                         <div class="search_item-info-productname">${productName}</div>
@@ -88,20 +88,15 @@ inputText.addEventListener('keydown', (event) => {
                   closeModal();
                 }
               });
-
               function closeModal() {
                 inputText.value = '';
                 showProduct.classList.add('hide');
                 showProduct.classList.remove('show');
                 document.showProduct.style.overflow = '';
+                
+// тут  тут тут тут
 
-// тут  тут тут 
 
-                if(button.addEventListener('click'), () => {
-                    showProduct.classList.add('hide');
-                    showProduct.classList.remove('show');
-                    document.showProduct.style.overflow = '';
-                });
               }
                 
             const addSearchBtn = document.querySelector('.search-add-cart');
@@ -146,7 +141,6 @@ inputText.addEventListener('keydown', (event) => {
                   closeModal();
                 }
               });
-
               function closeModal() {
                 showProduct.classList.add('hide');
                 showProduct.classList.remove('show');
@@ -154,8 +148,8 @@ inputText.addEventListener('keydown', (event) => {
               }
         }
 
+     
 
-    
 }});  
 
 // and Filter
@@ -234,6 +228,8 @@ async function getPhoto() {
 
         sliderWrapper.append(img);
     });
+
+
 }
 
 getPhoto();
@@ -415,4 +411,3 @@ function createElement(basket) {
     });
   }
   
-    
