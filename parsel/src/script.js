@@ -2,7 +2,7 @@ import {setName, getName, generateId} from './localStorage&Id.js';
 
 const prev = document.getElementById('btn-prev'),
     next = document.getElementById('btn-next'),
-    slides = document.getElementsByClassName('slide'),
+    slides = document.getElementsByClassName('slide'), 
     dots = document.querySelectorAll('.dot'),
     sliderWrapper = document.querySelector('.slider-wrapper'),
 
@@ -222,7 +222,7 @@ async function getPhoto() {
         img.src = photo;
         img.style.cssText = `
         height: 100%
-        width: 100%;
+        width: 100%ж
         border-radius: 20px;
         `;
 
@@ -236,11 +236,12 @@ getPhoto();
 
 
 export const arrayProducts = [ 
+
     {id: 1, productName: 'штаны', sales: '10%', price: '900', oldPrice:'1000p', image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0XzrXJLU8TPFfMVrtbqlPDWpqHOfkimNWIw&usqp=CAU'},
-    {id: 2, productName: 'шорты', sales: '5%', price: '950', oldPrice:'1000p', image:'https://ru.inters.pl/rus_pl_%D1%88%D0%BE%D1%80%D1%82%D1%8B-TIBHAR-Duo-5988_1.jpg'},
-    {id: 3, productName: 'майка', sales: '15%', price: '850', oldPrice:'1000p', image:'https://storage.vsemayki.ru/images/0/1/1053/1053769/previews/people_4_manshortfull_front_white_500.jpg'},
-    {id: 4, productName: 'обувь', sales: '20%', price: '800', oldPrice:'1000p', image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmlka5LNqViUDeHSvzdDQzVE0Fg5EuKTjmGw&usqp=CAU'},
-    {id: 5, productName: 'шапка', sales: '15%', price: '850', oldPrice:'1000p', image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmWuQZ_sCd2DnYW7hwOqrl-3bcJfEwNYMsPw&usqp=CAU'},
+    {id: 2, productName: 'шорты', sales: '5%', price: '950', oldPrice:'1000p', image:'https://ru.inters.pl/rus_pl_%D1%88%D0%BE%D1%80%D1%82%D1%8B-TIBHAR-Duo-5988_1.jpg%27%7D'},
+    {id: 3, productName: 'майка', sales: '15%', price: '850', oldPrice:'1000p', image:'https://storage.vsemayki.ru/images/0/1/1053/1053769/previews/people_4_manshortfull_front_white_500.jpg%27%7D'},
+    {id: 4, productName: 'обувь', sales: '20%', price: '800', oldPrice:'1000p', image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmlka5LNqViUDeHSvzdDQzVE0Fg5EuKTjmGw&usqp=CAU%27%7D'},
+    {id: 5, productName: 'шапка', sales: '15%', price: '850', oldPrice:'1000p', image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmWuQZ_sCd2DnYW7hwOqrl-3bcJfEwNYMsPw&usqp=CAU%27%7D'},
 ];
 
 arrayProducts.forEach((product) => {
@@ -410,4 +411,3 @@ function createElement(basket) {
     });
   }
   
-    
