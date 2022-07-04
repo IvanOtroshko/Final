@@ -1,7 +1,8 @@
+import {setName, getName, generateId} from './localStorage&Id.js';
 
 const prev = document.getElementById('btn-prev'),
     next = document.getElementById('btn-next'),
-    slides = document.getElementsByClassName('slide'), // 2) заменить на живую коллекцию
+    slides = document.getElementsByClassName('slide'),
     dots = document.querySelectorAll('.dot'),
     sliderWrapper = document.querySelector('.slider-wrapper'),
 
@@ -10,7 +11,7 @@ const prev = document.getElementById('btn-prev'),
 
 let index = 0;
 
-
+ 
 
 
 // Filter 
@@ -24,6 +25,11 @@ inputText.addEventListener('keydown', (event) => {
         arrayProducts.find( x => x.productName === inputText.value)
         const enterProduct = [].concat(arrayProducts.find( x => x.productName === inputText.value));
         if(enterProduct[0] !== undefined) {
+
+
+            console.log(enterProduct[0].price);
+            
+
 
             enterProduct.forEach(product => {
             enter(product)});
@@ -43,6 +49,9 @@ inputText.addEventListener('keydown', (event) => {
             background-color: rgba(0,0,0,0.7);
             z-index: 1000;
             bottom: -150px;
+            image-size: contain;
+           
+            
             `;
             headerInfo.append(showProduct);
 
@@ -79,15 +88,34 @@ inputText.addEventListener('keydown', (event) => {
                   closeModal();
                 }
               });
-            
               function closeModal() {
                 showProduct.classList.add('hide');
                 showProduct.classList.remove('show');
                 document.showProduct.style.overflow = '';
-              }
-            
-            }
 
+// тут  тут тут тут
+
+                if(button.addEventListener('click'), () => {
+                    showProduct.classList.add('hide');
+                    showProduct.classList.remove('show');
+                    document.showProduct.style.overflow = '';
+                });
+              }
+                
+            const addSearchBtn = document.querySelector('.search-add-cart');
+            addSearchBtn.addEventListener('click', () => {
+                const basket = {};
+                basket.id = generateId();
+                basket.text = productName;
+                basket.price = price;
+                baskets.push(basket);
+                sumPrice += + price;
+                listSumm.innerHTML =`Итого ${sumPrice}р`;
+                createElement(basket);
+                setName(baskets);
+            });
+            }
+           
 
         } else {
             const headerInfo = document.querySelector('header');
@@ -108,7 +136,6 @@ inputText.addEventListener('keydown', (event) => {
 
             headerInfo.append(showProduct);
            
-
             showProduct.addEventListener('click', (e) => {
                 if (
                   e.target === showProduct ||
@@ -117,15 +144,11 @@ inputText.addEventListener('keydown', (event) => {
                   closeModal();
                 }
               });
-            
               function closeModal() {
                 showProduct.classList.add('hide');
                 showProduct.classList.remove('show');
                 document.showProduct.style.overflow = '';
               }
-            
-
-            
         }
 
      
@@ -141,7 +164,7 @@ const activeSlide = n => {
     for (let slide of slides) {
         slide.classList.remove('active')
     }
-    slides[n].classList.add('active') 
+    slides[n].classList.add('active')
 }
 
 const activeDot = n => {
@@ -195,9 +218,9 @@ async function getPhoto() {
     const slider = await response.json();
     slider.forEach(({ photo }, index) => {
         const img = document.createElement('img');
-        img.classList.add('slide'); 
+        img.classList.add('slide');
         if (index === 0) {
-            img.classList.add('active'); 
+            img.classList.add('active');
         }
         img.src = photo;
         img.style.cssText = `
@@ -213,25 +236,24 @@ async function getPhoto() {
 }
 
 getPhoto();
- 
 
 
-const arrayProducts = [ 
-    {id: 1, productName: 'штаны', sales: '10%', price: '900p', oldPrice:'1000p', image:'http://loremflickr.com/640/480/food'},
-    {id: 2, productName: 'шорты', sales: '5%', price: '950p', oldPrice:'1000p', image:'http://loremflickr.com/640/480/food'},
-    {id: 3, productName: 'майка', sales: '15%', price: '850p', oldPrice:'1000p', image:'http://loremflickr.com/640/480/food'},
-    {id: 4, productName: 'обувь', sales: '20%', price: '800p', oldPrice:'1000p', image:'http://loremflickr.com/640/480/food'},
-    {id: 5, productName: 'шапка', sales: '15%', price: '850p', oldPrice:'1000p', image:'http://loremflickr.com/640/480/food'},
+export const arrayProducts = [ 
+    {id: 1, productName: 'штаны', sales: '10%', price: '900', oldPrice:'1000p', image:'https://www.tradeinn.com/h/13812/138121549/new-balance-woven-cargo-%D1%88%D1%82%D0%B0%D0%BD%D1%8B.jpg'},
+    {id: 2, productName: 'шорты', sales: '5%', price: '950', oldPrice:'1000p', image:'https://ru.inters.pl/rus_pl_%D1%88%D0%BE%D1%80%D1%82%D1%8B-TIBHAR-Duo-5988_1.jpg'},
+    {id: 3, productName: 'майка', sales: '15%', price: '850', oldPrice:'1000p', image:'https://storage.vsemayki.ru/images/0/1/1053/1053769/previews/people_4_manshortfull_front_white_500.jpg'},
+    {id: 4, productName: 'обувь', sales: '20%', price: '800', oldPrice:'1000p', image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmlka5LNqViUDeHSvzdDQzVE0Fg5EuKTjmGw&usqp=CAU'},
+    {id: 5, productName: 'шапка', sales: '15%', price: '850', oldPrice:'1000p', image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmWuQZ_sCd2DnYW7hwOqrl-3bcJfEwNYMsPw&usqp=CAU'},
 ];
 
 arrayProducts.forEach((product) => {
     createItem(product);
 
 });
-
+// http://loremflickr.com/640/480/food
 // function serchProduct({productName})
 
-function createItem({productName,sales, price, oldPrice, image}) {
+function createItem({ productName, sales, price, oldPrice, image }) {
     const productItem = document.createElement('div');
     productItem.classList.add('products_item');
 
@@ -247,7 +269,7 @@ function createItem({productName,sales, price, oldPrice, image}) {
         </div>
     </div>
     <div class="products_item-info">
-        <div class="products_item-info-newprice">${price}</div>
+        <div class="products_item-info-newprice">${price} p</div>
         <div class="products_item-info-oldprice">${oldPrice}</div>
         <div class="products_item-info-productname">${productName}</div>
     </div >
@@ -265,42 +287,130 @@ function createItem({productName,sales, price, oldPrice, image}) {
 function modal() {
     const button = document.querySelector('.btn-cart');
     const modalElement = document.querySelector('.modal');
-  
+
     button.addEventListener('click', () => openModal());
-  
+
     modalElement.addEventListener('click', (e) => {
-      if (
-        e.target === modalElement ||
-        e.target.getAttribute('data-close') == ''
-      ) {
-        closeModal();
-      }
+        if (
+            e.target === modalElement ||
+            e.target.getAttribute('data-close') == ''
+        ) {
+            closeModal();
+        }
     });
-  
+
     document.addEventListener('keydown', (e) => {
-      if (e.keyCode === 27 && modalElement.classList.contains('show')) {
-        closeModal();
-      }
+        if (e.keyCode === 27 && modalElement.classList.contains('show')) {
+            closeModal();
+        }
     });
-  
+
     function openModal() {
-      modalElement.classList.add('show');
-      modalElement.classList.remove('hide');
-      document.body.style.overflow = 'hidden';
+        modalElement.classList.add('show');
+        modalElement.classList.remove('hide');
+        document.body.style.overflow = 'hidden';
     }
-  
+
     function closeModal() {
-      modalElement.classList.add('hide');
-      modalElement.classList.remove('show');
-      document.body.style.overflow = '';
+        modalElement.classList.add('hide');
+        modalElement.classList.remove('show');
+        document.body.style.overflow = '';
     }
-  }
-  
-  modal();
+}
+
+modal();
 
   //and ModalCart
 
 
+//   корзина
+
+    const btnDelete = document.querySelector('.modal-info-btnDelete');
+    const addBtn = document.querySelectorAll('.btn-add-cart'); 
+    const modalContent = document.querySelector('.modal__content');
+    const listItemBasket = document.createElement('modal__list');
+    const listSumm = document.createElement('listSumm');
+    let baskets = [];
+
+if (localStorage.getItem('basket')) {
+    baskets = JSON.parse(getName());
+    baskets.forEach((item) => {
+      createElement(item);
+    });
+  }
+
+  let sumPrice = 0;
+  baskets.map((baskets) => {
+  sumPrice +=  +baskets.price;
+  });
+  listSumm.innerHTML =`Итого ${sumPrice}р`;
+  listSumm.classList.add('listSumm');
 
 
+addBtn.forEach((value, index) => {
+    value.addEventListener('click', () => {
+                  const basket = {};
+                  basket.id = generateId();
+                  basket.text = arrayProducts[index].productName;
+                  basket.price = arrayProducts[index].price;
+                  baskets.push(basket);
+                  sumPrice += + arrayProducts[index].price;
+                  listSumm.innerHTML =`Итого ${sumPrice}р`;
+                  createElement(basket);
+                  setName(baskets);
+                  index++;
+});
 
+
+btnDelete.addEventListener('click', () => {
+    baskets.length = 0;
+    listItemBasket.innerHTML = '';
+    sumPrice = 0;
+    listSumm.innerHTML = '';
+    setName(baskets);
+});});
+
+  
+function createElement(basket) {
+    const itemBasket = document.createElement('div');
+    itemBasket.classList.add('itemBasket');
+    itemBasket.id = basket.id;
+  
+    const textBasket = document.createElement('text');
+    textBasket.innerHTML = basket.text;
+    textBasket.style.cssText = `
+    width: 60%;
+    height: 50%;
+    background: white;
+    border-radius: 5px;
+`;
+
+    const checkBasket = document.createElement('price');
+    checkBasket.innerHTML = `${basket.price}р` ;
+    checkBasket.style.cssText = `
+    width: 20%;
+    height: 50%;
+`;
+    const deleteItemBtn = document.createElement('buttonDeleteElement');
+    deleteItemBtn.classList.add('btnDeleteElem');
+    deleteItemBtn.innerText = `X`;
+    
+        modalContent.append(listItemBasket, listSumm);
+        listItemBasket.append(itemBasket)
+        itemBasket.append(textBasket, checkBasket, deleteItemBtn);
+        
+  
+    deleteItemBtn.addEventListener('click', () => {
+      baskets = baskets.filter((i) => i.id !== basket.id);
+      sumPrice -= + basket.price;
+      if (sumPrice === 0) {
+        listSumm.innerHTML = '';
+      } else {
+    listSumm.innerHTML =`Итого ${sumPrice}р`;
+      }
+      setName(baskets);
+      itemBasket.remove();
+    });
+  }
+  
+    
