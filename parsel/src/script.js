@@ -22,7 +22,7 @@ inputText.addEventListener('keydown', (event) => {
             enterProduct.forEach(value => {
             index = 0;
             quickSearch(enterProduct, index)
-            
+            console.log(enterProduct);
         });
   
     } else {
@@ -222,7 +222,7 @@ addBtn.forEach((value, index) => {
                   listSumm.innerHTML =`Итого ${sumPrice}р`;
                   createElement(basket);
                   setName(baskets);
-                  index++;
+                
 });
 
 btnDelete.addEventListener('click', () => {
@@ -256,9 +256,9 @@ function createElement(basket) {
     deleteItemBtn.classList.add('btnDeleteElem');
     deleteItemBtn.innerText = `X`;
 
-        modalContent.append(listItemBasket, listSumm);
-        listItemBasket.append(itemBasket)
-        itemBasket.append(textBasket, checkBasket, deleteItemBtn);
+    modalContent.append(listItemBasket, listSumm);
+    listItemBasket.append(itemBasket)
+    itemBasket.append(textBasket, checkBasket, deleteItemBtn);
 
 
     deleteItemBtn.addEventListener('click', () => {
@@ -279,9 +279,7 @@ function createElement(basket) {
   const addBtnPreview = document.querySelectorAll('.btn-card-preview'); 
   addBtnPreview.forEach((value, index) => {
     value.addEventListener('click', () => {
-                quickSearch(arrayProducts, index)
-                    
-                  index++;
+                quickSearch(arrayProducts, index)     
 }); });
 
 function quickSearch(x, index) {
@@ -328,10 +326,10 @@ function quickSearch(x, index) {
     addSearchBtn.addEventListener('click', () => {
         const basket = {};
         basket.id = generateId();
-        basket.text = arrayProducts[index].productName;
-        basket.price = arrayProducts[index].price;
+        basket.text = x[index].productName;
+        basket.price = x[index].price;
         baskets.push(basket);
-        sumPrice += + arrayProducts[index].price;
+        sumPrice += + x[index].price;
         listSumm.innerHTML =`Итого ${sumPrice}р`;
         createElement(basket);
         setName(baskets);
