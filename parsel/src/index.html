@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wildberries</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <header>
+        <section class="header">
+                <div class="wrapper">
+                    <div class="header-info">
+                        <button type="button" href="index.html" class="btn-logo">Wildberries</button>
+                        <input type="text" value="" class="search-area" placeholder="Поиск...">
+                        <button type="button" class="btn-cart"><img src="png"></button>
+                    </div>
+                </div>
+                <div class="modal">
+                    <div class="modal_dialog">
+                    <div class="modal__content">
+                        <div class="modal__close" data-close>&times;</div>
+                        <div class="modal_dialog-info">
+                            <div class="modal_dialog-info-title">
+                                <div class="modal-info-cart">Корзина</div>
+                                <button class="modal-info-btnDelete">Очистить корзину</button>
+                            </div>
+                            <ul class="items"></ul>
+                        </div>
+                        
+                    </div>
+                </div>
+                </div>
+        </section>
+    </header>
+    
+    <section class="slider">
+        <div class="wrapper">
+            <div class="flex-wrapper">
+                <div class="slider-wrapper">
+                    <div id="btn-prev"></div>
+                    <div id="btn-next"></div>
+                </div>
+            </div>
+            <div class="dots-wrapper">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="products">
+        <div class="wrapper">
+             <div class="products_list" id="productsList">
+               
+            </div> 
+        </div>
+    </section>
+
+    <script src="./script.js" type="module"></script>
+</body>
+</html>
