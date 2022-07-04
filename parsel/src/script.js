@@ -402,6 +402,5 @@ function createElement(basket) {
       itemBasket.remove();
     });
   }
-
   
     
