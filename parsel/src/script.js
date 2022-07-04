@@ -273,6 +273,7 @@ function createItem({ productName, sales, price, oldPrice, image }) {
     </div >
 `;
     productsList.append(productItem);
+    
 
 };
 
