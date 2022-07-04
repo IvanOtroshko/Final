@@ -1,23 +1,17 @@
 import {setName, getName, generateId} from './localStorage&Id.js';
-
 const prev = document.getElementById('btn-prev'),
     next = document.getElementById('btn-next'),
-    slides = document.getElementsByClassName('slide'), 
+    slides = document.getElementsByClassName('slide'),
     dots = document.querySelectorAll('.dot'),
     sliderWrapper = document.querySelector('.slider-wrapper'),
-
     btnCart = document.querySelector('.btn-cart'),
     productsList = document.querySelector('.products_list');
 
 let index = 0;
 
- 
-
 
 // Filter 
-
 const enterProduct = [];
-
 const inputText = document.querySelector('.search-area');
 inputText.addEventListener('keydown', (event) => {
     event.stopImmediatePropagation();
@@ -26,14 +20,9 @@ inputText.addEventListener('keydown', (event) => {
         const enterProduct = [].concat(arrayProducts.find( x => x.productName === inputText.value));
         if(enterProduct[0] !== undefined) {
 
-
-            console.log(enterProduct[0].price);
-            
-
-
             enterProduct.forEach(product => {
             enter(product)});
-    
+
             function enter({productName,sales, price, oldPrice, image}) {
             const headerInfo = document.querySelector('header');
             const showProduct = document.createElement('div');
@@ -48,13 +37,9 @@ inputText.addEventListener('keydown', (event) => {
             height: 100%;
             background-color: rgba(0,0,0,0.7);
             z-index: 1000;
-            bottom: -150px;
-            image-size: contain;
-           
-            
+            bottom: 0px;
             `;
             headerInfo.append(showProduct);
-
             const searchModal = document.createElement('div');
             searchModal.classList.add('search-modal');
             searchModal.style.cssText = `
@@ -63,22 +48,36 @@ inputText.addEventListener('keydown', (event) => {
                 width: 400px;
                 height: 600px;
                 margin: 0 auto;
-
             `;
-
             searchModal.innerHTML = `
             <div class="search_item-image-card">
             <img class="search_item-image" src=${image}/>
                 <div class="search_info">
                         <div class="search-info-discount">скидка -${sales}</div>
-                        <button class="search-add-cart">Добавить в корзину</button>
-                        <div class="search_item-info-newprice">${price}</div>
+                        <button class="search-add-cart">+</button>
+                        <div class="search_item-info-newprice">${price} р</div>
                         <div class="search_item-info-oldprice">${oldPrice}</div>
                         <div class="search_item-info-productname">${productName}</div>
                 </div>
             </div>
         `;
             showProduct.append(searchModal);
+
+            const addSearchBtn = document.querySelector('.search-add-cart');
+        
+            addSearchBtn.addEventListener('click', () => {
+                const basket = {};
+                basket.id = generateId();
+                basket.text = productName;
+                basket.price = price;
+                baskets.push(basket);
+                sumPrice += + price;
+                listSumm.innerHTML =`Итого ${sumPrice}р`;
+                createElement(basket);
+                setName(baskets);
+                
+            });
+            
 
             showProduct.addEventListener('click', (e) => {
                 if (
@@ -92,29 +91,12 @@ inputText.addEventListener('keydown', (event) => {
                 inputText.value = '';
                 showProduct.classList.add('hide');
                 showProduct.classList.remove('show');
-                document.showProduct.style.overflow = '';
-                
-// тут  тут тут тут
-
-
-              }
-                
-            const addSearchBtn = document.querySelector('.search-add-cart');
-            addSearchBtn.addEventListener('click', () => {
-                const basket = {};
-                basket.id = generateId();
-                basket.text = productName;
-                basket.price = price;
-                baskets.push(basket);
-                sumPrice += + price;
-                listSumm.innerHTML =`Итого ${sumPrice}р`;
-                createElement(basket);
-                setName(baskets);
-            });
+                document.body.style.overflow = '';
+              }           
             }
-           
 
-        } else {
+            
+    } else {
             const headerInfo = document.querySelector('header');
             const showProduct = document.createElement('div');
             showProduct.className = 'modal-product';
@@ -130,9 +112,7 @@ inputText.addEventListener('keydown', (event) => {
             z-index: 1000;
             bottom: -150px;
             `;
-
             headerInfo.append(showProduct);
-           
             showProduct.addEventListener('click', (e) => {
                 if (
                   e.target === showProduct ||
@@ -146,36 +126,27 @@ inputText.addEventListener('keydown', (event) => {
                 showProduct.classList.remove('show');
                 document.showProduct.style.overflow = '';
               }
+           
         }
-
-     
-
+    
 }});  
-
 // and Filter
-
-
-
-
 const activeSlide = n => {
     for (let slide of slides) {
         slide.classList.remove('active')
     }
     slides[n].classList.add('active')
 }
-
 const activeDot = n => {
     for (let dot of dots) {
         dot.classList.remove('active')
     }
     dots[n].classList.add('active')
 }
-
 const prepareCurrentSlide = ind => {
     activeSlide(ind);
     activeDot(ind);
 }
-
 const nextSlide = () => {
     if (index == slides.length - 1) {
         index = 0;
@@ -185,7 +156,6 @@ const nextSlide = () => {
         prepareCurrentSlide(index);;
     }
 }
-
 const prevSlide = () => {
     if (index == 0) {
         index = slides.length - 1
@@ -195,21 +165,15 @@ const prevSlide = () => {
         prepareCurrentSlide(index);
     }
 }
-
 dots.forEach((item, indexDot) => {
     item.addEventListener('click', () => {
         index = indexDot;
         prepareCurrentSlide(index);
     })
 });
-
 next.addEventListener('click', nextSlide);
 prev.addEventListener('click', prevSlide);
-
-
 const BASE_URL = 'https://62b9625441bf319d227b299f.mockapi.io';
-
-
 async function getPhoto() {
     const response = await fetch(`${BASE_URL}/slider`);
     const slider = await response.json();
@@ -222,20 +186,17 @@ async function getPhoto() {
         img.src = photo;
         img.style.cssText = `
         height: 100%
-        width: 100%ж
+        width: 100%;
         border-radius: 20px;
         `;
-
         sliderWrapper.append(img);
     });
-
-
 }
-
 getPhoto();
 
 
-export const arrayProducts = [ 
+
+const arrayProducts = [ 
 
     {id: 1, productName: 'штаны', sales: '10%', price: '900', oldPrice:'1000p', image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0XzrXJLU8TPFfMVrtbqlPDWpqHOfkimNWIw&usqp=CAU'},
     {id: 2, productName: 'шорты', sales: '5%', price: '950', oldPrice:'1000p', image:'https://ru.inters.pl/rus_pl_%D1%88%D0%BE%D1%80%D1%82%D1%8B-TIBHAR-Duo-5988_1.jpg%27%7D'},
@@ -246,15 +207,11 @@ export const arrayProducts = [
 
 arrayProducts.forEach((product) => {
     createItem(product);
-
 });
-// http://loremflickr.com/640/480/food
 // function serchProduct({productName})
-
 function createItem({ productName, sales, price, oldPrice, image }) {
     const productItem = document.createElement('div');
     productItem.classList.add('products_item');
-
    productItem.innerHTML = `
     <div class="products_item-image-card">
     <img class="products_item-image" src=${image} />
@@ -267,28 +224,18 @@ function createItem({ productName, sales, price, oldPrice, image }) {
         </div>
     </div>
     <div class="products_item-info">
-        <div class="products_item-info-newprice">${price} p</div>
+        <div class="products_item-info-newprice">${price}</div>
         <div class="products_item-info-oldprice">${oldPrice}</div>
         <div class="products_item-info-productname">${productName}</div>
     </div >
 `;
     productsList.append(productItem);
-    
-
 };
-
-// and Products
-
-
-
-// modalCart
 
 function modal() {
     const button = document.querySelector('.btn-cart');
     const modalElement = document.querySelector('.modal');
-
     button.addEventListener('click', () => openModal());
-
     modalElement.addEventListener('click', (e) => {
         if (
             e.target === modalElement ||
@@ -297,28 +244,23 @@ function modal() {
             closeModal();
         }
     });
-
     document.addEventListener('keydown', (e) => {
         if (e.keyCode === 27 && modalElement.classList.contains('show')) {
             closeModal();
         }
     });
-
     function openModal() {
         modalElement.classList.add('show');
         modalElement.classList.remove('hide');
         document.body.style.overflow = 'hidden';
     }
-
     function closeModal() {
         modalElement.classList.add('hide');
         modalElement.classList.remove('show');
         document.body.style.overflow = '';
     }
 }
-
 modal();
-
   //and ModalCart
 
 
@@ -369,12 +311,12 @@ btnDelete.addEventListener('click', () => {
     setName(baskets);
 });});
 
-  
+
 function createElement(basket) {
     const itemBasket = document.createElement('div');
     itemBasket.classList.add('itemBasket');
     itemBasket.id = basket.id;
-  
+
     const textBasket = document.createElement('text');
     textBasket.innerHTML = basket.text;
     textBasket.style.cssText = `
@@ -393,12 +335,12 @@ function createElement(basket) {
     const deleteItemBtn = document.createElement('buttonDeleteElement');
     deleteItemBtn.classList.add('btnDeleteElem');
     deleteItemBtn.innerText = `X`;
-    
+
         modalContent.append(listItemBasket, listSumm);
         listItemBasket.append(itemBasket)
         itemBasket.append(textBasket, checkBasket, deleteItemBtn);
-        
-  
+
+
     deleteItemBtn.addEventListener('click', () => {
       baskets = baskets.filter((i) => i.id !== basket.id);
       sumPrice -= + basket.price;
@@ -411,4 +353,86 @@ function createElement(basket) {
       itemBasket.remove();
     });
   }
-  
+
+  // быстрый просмотр 
+
+  const addBtnPreview = document.querySelectorAll('.btn-card-preview'); 
+  addBtnPreview.forEach((value, index) => {
+    value.addEventListener('click', () => {
+                quickSearch(index)
+                    
+                  index++;
+}); });
+
+function quickSearch(index) {
+    const headerInfo = document.querySelector('header');
+    const showProduct = document.createElement('div');
+    showProduct.className = 'modal-product';
+    showProduct.style.cssText = `
+    padding-top: 50px;
+    text-align: center;
+    font-size: 50px;
+    color: rgba(215,22,154,0.9654455532212886);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 1000;
+    bottom: 0px;
+    `;
+    headerInfo.append(showProduct);
+    const searchModal = document.createElement('div');
+    searchModal.classList.add('search-modal');
+    searchModal.style.cssText = `
+        background-color: white;
+        border-radius: 35px;
+        width: 400px;
+        height: 600px;
+        margin: 0 auto;
+    `;
+    searchModal.innerHTML = `
+    <div class="search_item-image-card">
+    <img class="search_item-image" src=${arrayProducts[index].image}/>
+        <div class="search_info">
+                <div class="search-info-discount">скидка -${arrayProducts[index].sales}</div>
+                <button class="search-add-cart">+</button>
+                <div class="search_item-info-newprice">${arrayProducts[index].price} р</div>
+                <div class="search_item-info-oldprice">${arrayProducts[index].oldPrice}</div>
+                <div class="search_item-info-productname">${arrayProducts[index].productName}</div>
+        </div>
+    </div>
+`;
+    showProduct.append(searchModal);
+
+    const addSearchBtn = document.querySelector('.search-add-cart');
+    console.log(baskets);
+    console.log(addSearchBtn);
+    addSearchBtn.addEventListener('click', () => {
+        const basket = {};
+        basket.id = generateId();
+        basket.text = arrayProducts[index].productName;
+        basket.price = arrayProducts[index].price;
+        baskets.push(basket);
+        sumPrice += + arrayProducts[index].price;
+        listSumm.innerHTML =`Итого ${sumPrice}р`;
+        createElement(basket);
+        setName(baskets);
+        console.log(basket);
+        
+    });
+
+    showProduct.addEventListener('click', (e) => {
+        if (
+          e.target === showProduct ||
+          e.target.getAttribute('data-close') == ''
+        ) {
+          closeModal();
+        }
+      });
+      function closeModal() {
+        inputText.value = '';
+        showProduct.classList.add('hide');
+        showProduct.classList.remove('show');
+        document.body.style.overflow = '';
+      }     
+}
