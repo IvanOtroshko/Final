@@ -49,6 +49,9 @@ inputText.addEventListener('keydown', (event) => {
             background-color: rgba(0,0,0,0.7);
             z-index: 1000;
             bottom: -150px;
+            image-size: contain;
+           
+            
             `;
             headerInfo.append(showProduct);
 
@@ -90,6 +93,14 @@ inputText.addEventListener('keydown', (event) => {
                 showProduct.classList.add('hide');
                 showProduct.classList.remove('show');
                 document.showProduct.style.overflow = '';
+
+// тут  тут тут 
+
+                if(button.addEventListener('click'), () => {
+                    showProduct.classList.add('hide');
+                    showProduct.classList.remove('show');
+                    document.showProduct.style.overflow = '';
+                });
               }
                 
             const addSearchBtn = document.querySelector('.search-add-cart');
@@ -105,7 +116,7 @@ inputText.addEventListener('keydown', (event) => {
                 setName(baskets);
             });
             }
-            
+           
 
         } else {
             const headerInfo = document.querySelector('header');
@@ -228,18 +239,18 @@ getPhoto();
 
 
 export const arrayProducts = [ 
-    {id: 1, productName: 'штаны', sales: '10%', price: '900', oldPrice:'1000p', image:'http://loremflickr.com/640/480/food'},
-    {id: 2, productName: 'шорты', sales: '5%', price: '950', oldPrice:'1000p', image:'http://loremflickr.com/640/480/food'},
-    {id: 3, productName: 'майка', sales: '15%', price: '850', oldPrice:'1000p', image:'http://loremflickr.com/640/480/food'},
-    {id: 4, productName: 'обувь', sales: '20%', price: '800', oldPrice:'1000p', image:'http://loremflickr.com/640/480/food'},
-    {id: 5, productName: 'шапка', sales: '15%', price: '850', oldPrice:'1000p', image:'http://loremflickr.com/640/480/food'},
+    {id: 1, productName: 'штаны', sales: '10%', price: '900', oldPrice:'1000p', image:'https://www.tradeinn.com/h/13812/138121549/new-balance-woven-cargo-%D1%88%D1%82%D0%B0%D0%BD%D1%8B.jpg'},
+    {id: 2, productName: 'шорты', sales: '5%', price: '950', oldPrice:'1000p', image:'https://ru.inters.pl/rus_pl_%D1%88%D0%BE%D1%80%D1%82%D1%8B-TIBHAR-Duo-5988_1.jpg'},
+    {id: 3, productName: 'майка', sales: '15%', price: '850', oldPrice:'1000p', image:'https://storage.vsemayki.ru/images/0/1/1053/1053769/previews/people_4_manshortfull_front_white_500.jpg'},
+    {id: 4, productName: 'обувь', sales: '20%', price: '800', oldPrice:'1000p', image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmlka5LNqViUDeHSvzdDQzVE0Fg5EuKTjmGw&usqp=CAU'},
+    {id: 5, productName: 'шапка', sales: '15%', price: '850', oldPrice:'1000p', image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmWuQZ_sCd2DnYW7hwOqrl-3bcJfEwNYMsPw&usqp=CAU'},
 ];
 
 arrayProducts.forEach((product) => {
     createItem(product);
 
 });
-
+// http://loremflickr.com/640/480/food
 // function serchProduct({productName})
 
 function createItem({ productName, sales, price, oldPrice, image }) {
@@ -258,7 +269,7 @@ function createItem({ productName, sales, price, oldPrice, image }) {
         </div>
     </div>
     <div class="products_item-info">
-        <div class="products_item-info-newprice">${price}</div>
+        <div class="products_item-info-newprice">${price} p</div>
         <div class="products_item-info-oldprice">${oldPrice}</div>
         <div class="products_item-info-productname">${productName}</div>
     </div >
